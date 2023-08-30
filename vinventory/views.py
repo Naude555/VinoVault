@@ -115,7 +115,18 @@ class WineUpdateView(LoginRequiredMixin, UpdateView):
 
 class WineDeleteView(LoginRequiredMixin, DeleteView):
     """
-    Delete a wine entry from the inventory.
+    View for deleting a wine entry from the inventory.
+
+    Inherits from Django's DeleteView and requires user login.
+
+    Attributes:
+        model (class): The model class representing the Wine data.
+        template_name (str): The name of the template used for the deletion confirmation page.
+        success_url (str): The URL to redirect to after successful deletion.
+
+    Methods:
+        get_queryset(): Return the wines filtered by the logged-in user.
+        get_success_url(): Return the URL to redirect to after successful deletion.
     """
 
     model = Wine
@@ -124,12 +135,18 @@ class WineDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_queryset(self):
         """
-        Return the wines filtered by the logged-in user.
+        Return the queryset of wines filtered by the logged-in user.
+
+        Returns:
+            QuerySet: A QuerySet of Wine objects.
         """
         return Wine.objects.filter(user=self.request.user)
 
     def get_success_url(self):
         """
         Return the URL to redirect to after successful deletion.
+
+        Returns:
+            str: The URL for the wine list view.
         """
         return reverse_lazy("vinventory:wine_list")
