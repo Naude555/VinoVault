@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>vinventory package &mdash; VinoVault 00.00.01 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=d7bb8d4d"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="vinventory.migrations package" href="vinventory.migrations.html" />
+    <link rel="prev" title="vinventory" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            VinoVault
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">vinventory</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">vinventory package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="vinventory.migrations.html">vinventory.migrations package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-vinventory.admin">vinventory.admin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-vinventory.apps">vinventory.apps module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#vinventory.apps.VinventoryConfig"><code class="docutils literal notranslate"><span class="pre">VinventoryConfig</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-vinventory.models">vinventory.models module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#vinventory.models.Region"><code class="docutils literal notranslate"><span class="pre">Region</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vinventory.models.Variety"><code class="docutils literal notranslate"><span class="pre">Variety</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vinventory.models.Wine"><code class="docutils literal notranslate"><span class="pre">Wine</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vinventory.models.default_date_received"><code class="docutils literal notranslate"><span class="pre">default_date_received()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vinventory.models.default_date_to_drink_end"><code class="docutils literal notranslate"><span class="pre">default_date_to_drink_end()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vinventory.models.default_date_to_drink_start"><code class="docutils literal notranslate"><span class="pre">default_date_to_drink_start()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-vinventory.tests">vinventory.tests module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vinventory-urls-module">vinventory.urls module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-vinventory.views">vinventory.views module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#vinventory.views.WineDeleteView"><code class="docutils literal notranslate"><span class="pre">WineDeleteView</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vinventory.views.WineListView"><code class="docutils literal notranslate"><span class="pre">WineListView</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vinventory.views.WineUpdateView"><code class="docutils literal notranslate"><span class="pre">WineUpdateView</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-vinventory">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">VinoVault</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">vinventory</a></li>
+      <li class="breadcrumb-item active">vinventory package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/vinventory.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="vinventory-package">
+<h1>vinventory package<a class="headerlink" href="#vinventory-package" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="vinventory.migrations.html">vinventory.migrations package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vinventory.migrations.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vinventory.migrations.html#module-vinventory.migrations.0001_initial">vinventory.migrations.0001_initial module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="vinventory.migrations.html#vinventory.migrations.0001_initial.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="vinventory.migrations.html#vinventory.migrations.0001_initial.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="vinventory.migrations.html#vinventory.migrations.0001_initial.Migration.initial"><code class="docutils literal notranslate"><span class="pre">Migration.initial</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="vinventory.migrations.html#vinventory.migrations.0001_initial.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vinventory.migrations.html#module-vinventory.migrations.0002_alter_wine_date_received_and_more">vinventory.migrations.0002_alter_wine_date_received_and_more module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="vinventory.migrations.html#vinventory.migrations.0002_alter_wine_date_received_and_more.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="vinventory.migrations.html#vinventory.migrations.0002_alter_wine_date_received_and_more.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="vinventory.migrations.html#vinventory.migrations.0002_alter_wine_date_received_and_more.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vinventory.migrations.html#module-vinventory.migrations.0003_alter_wine_date_received_and_more">vinventory.migrations.0003_alter_wine_date_received_and_more module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="vinventory.migrations.html#vinventory.migrations.0003_alter_wine_date_received_and_more.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="vinventory.migrations.html#vinventory.migrations.0003_alter_wine_date_received_and_more.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="vinventory.migrations.html#vinventory.migrations.0003_alter_wine_date_received_and_more.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vinventory.migrations.html#module-vinventory.migrations">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-vinventory.admin">
+<span id="vinventory-admin-module"></span><h2>vinventory.admin module<a class="headerlink" href="#module-vinventory.admin" title="Link to this heading"></a></h2>
+</section>
+<section id="module-vinventory.apps">
+<span id="vinventory-apps-module"></span><h2>vinventory.apps module<a class="headerlink" href="#module-vinventory.apps" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="vinventory.apps.VinventoryConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vinventory.apps.</span></span><span class="sig-name descname"><span class="pre">VinventoryConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_module</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vinventory/apps.html#VinventoryConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vinventory.apps.VinventoryConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AppConfig</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.apps.VinventoryConfig.default_auto_field">
+<span class="sig-name descname"><span class="pre">default_auto_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'django.db.models.BigAutoField'</span></em><a class="headerlink" href="#vinventory.apps.VinventoryConfig.default_auto_field" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.apps.VinventoryConfig.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'vinventory'</span></em><a class="headerlink" href="#vinventory.apps.VinventoryConfig.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-vinventory.models">
+<span id="vinventory-models-module"></span><h2>vinventory.models module<a class="headerlink" href="#module-vinventory.models" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="vinventory.models.Region">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vinventory.models.</span></span><span class="sig-name descname"><span class="pre">Region</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vinventory/models.html#Region"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vinventory.models.Region" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="vinventory.models.Region.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#vinventory.models.Region.DoesNotExist" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="vinventory.models.Region.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#vinventory.models.Region.MultipleObjectsReturned" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.models.Region.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#vinventory.models.Region.id" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.models.Region.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#vinventory.models.Region.name" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.models.Region.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#vinventory.models.Region.objects" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.models.Region.wine_set">
+<span class="sig-name descname"><span class="pre">wine_set</span></span><a class="headerlink" href="#vinventory.models.Region.wine_set" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vinventory.models.Variety">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vinventory.models.</span></span><span class="sig-name descname"><span class="pre">Variety</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vinventory/models.html#Variety"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vinventory.models.Variety" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="vinventory.models.Variety.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#vinventory.models.Variety.DoesNotExist" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="vinventory.models.Variety.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#vinventory.models.Variety.MultipleObjectsReturned" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.models.Variety.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#vinventory.models.Variety.id" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.models.Variety.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#vinventory.models.Variety.name" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.models.Variety.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#vinventory.models.Variety.objects" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.models.Variety.wine_set">
+<span class="sig-name descname"><span class="pre">wine_set</span></span><a class="headerlink" href="#vinventory.models.Variety.wine_set" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vinventory.models.Wine">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vinventory.models.</span></span><span class="sig-name descname"><span class="pre">Wine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variety</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">received_from</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_received</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_to_drink_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_to_drink_end</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vinventory/models.html#Wine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vinventory.models.Wine" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="vinventory.models.Wine.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#vinventory.models.Wine.DoesNotExist" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="vinventory.models.Wine.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#vinventory.models.Wine.MultipleObjectsReturned" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.models.Wine.date_received">
+<span class="sig-name descname"><span class="pre">date_received</span></span><a class="headerlink" href="#vinventory.models.Wine.date_received" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.models.Wine.date_to_drink_end">
+<span class="sig-name descname"><span class="pre">date_to_drink_end</span></span><a class="headerlink" href="#vinventory.models.Wine.date_to_drink_end" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.models.Wine.date_to_drink_start">
+<span class="sig-name descname"><span class="pre">date_to_drink_start</span></span><a class="headerlink" href="#vinventory.models.Wine.date_to_drink_start" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vinventory.models.Wine.get_absolute_url">
+<span class="sig-name descname"><span class="pre">get_absolute_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vinventory/models.html#Wine.get_absolute_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vinventory.models.Wine.get_absolute_url" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.models.Wine.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#vinventory.models.Wine.id" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vinventory.models.Wine.is_getting_old">
+<span class="sig-name descname"><span class="pre">is_getting_old</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vinventory/models.html#Wine.is_getting_old"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vinventory.models.Wine.is_getting_old" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vinventory.models.Wine.is_ready_to_drink">
+<span class="sig-name descname"><span class="pre">is_ready_to_drink</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vinventory/models.html#Wine.is_ready_to_drink"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vinventory.models.Wine.is_ready_to_drink" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.models.Wine.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#vinventory.models.Wine.name" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.models.Wine.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#vinventory.models.Wine.objects" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.models.Wine.quantity">
+<span class="sig-name descname"><span class="pre">quantity</span></span><a class="headerlink" href="#vinventory.models.Wine.quantity" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.models.Wine.received_from">
+<span class="sig-name descname"><span class="pre">received_from</span></span><a class="headerlink" href="#vinventory.models.Wine.received_from" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.models.Wine.region">
+<span class="sig-name descname"><span class="pre">region</span></span><a class="headerlink" href="#vinventory.models.Wine.region" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.models.Wine.region_id">
+<span class="sig-name descname"><span class="pre">region_id</span></span><a class="headerlink" href="#vinventory.models.Wine.region_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.models.Wine.user">
+<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#vinventory.models.Wine.user" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.models.Wine.user_id">
+<span class="sig-name descname"><span class="pre">user_id</span></span><a class="headerlink" href="#vinventory.models.Wine.user_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.models.Wine.variety">
+<span class="sig-name descname"><span class="pre">variety</span></span><a class="headerlink" href="#vinventory.models.Wine.variety" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.models.Wine.variety_id">
+<span class="sig-name descname"><span class="pre">variety_id</span></span><a class="headerlink" href="#vinventory.models.Wine.variety_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.models.Wine.year">
+<span class="sig-name descname"><span class="pre">year</span></span><a class="headerlink" href="#vinventory.models.Wine.year" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="vinventory.models.default_date_received">
+<span class="sig-prename descclassname"><span class="pre">vinventory.models.</span></span><span class="sig-name descname"><span class="pre">default_date_received</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vinventory/models.html#default_date_received"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vinventory.models.default_date_received" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="vinventory.models.default_date_to_drink_end">
+<span class="sig-prename descclassname"><span class="pre">vinventory.models.</span></span><span class="sig-name descname"><span class="pre">default_date_to_drink_end</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vinventory/models.html#default_date_to_drink_end"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vinventory.models.default_date_to_drink_end" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="vinventory.models.default_date_to_drink_start">
+<span class="sig-prename descclassname"><span class="pre">vinventory.models.</span></span><span class="sig-name descname"><span class="pre">default_date_to_drink_start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vinventory/models.html#default_date_to_drink_start"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vinventory.models.default_date_to_drink_start" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-vinventory.tests">
+<span id="vinventory-tests-module"></span><h2>vinventory.tests module<a class="headerlink" href="#module-vinventory.tests" title="Link to this heading"></a></h2>
+</section>
+<section id="vinventory-urls-module">
+<h2>vinventory.urls module<a class="headerlink" href="#vinventory-urls-module" title="Link to this heading"></a></h2>
+</section>
+<section id="module-vinventory.views">
+<span id="vinventory-views-module"></span><h2>vinventory.views module<a class="headerlink" href="#module-vinventory.views" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="vinventory.views.WineDeleteView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vinventory.views.</span></span><span class="sig-name descname"><span class="pre">WineDeleteView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vinventory/views.html#WineDeleteView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vinventory.views.WineDeleteView" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">LoginRequiredMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DeleteView</span></code></p>
+<p>View to delete a wine entry from the inventory.</p>
+<p>This view inherits from Django’s DeleteView and requires user authentication.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p>model: The model class representing Wine data.</p></li>
+<li><p>template_name: The name of the template for the deletion confirmation page.</p></li>
+<li><p>success_url: The URL to redirect to after successful deletion.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Methods<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p>get_queryset(): Return a queryset of wines filtered by the logged-in user.</p></li>
+<li><p>get_success_url(): Return the URL to redirect to after successful deletion.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="vinventory.views.WineDeleteView.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vinventory/views.html#WineDeleteView.get_queryset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vinventory.views.WineDeleteView.get_queryset" title="Link to this definition"></a></dt>
+<dd><p>Return a queryset of wines filtered by the logged-in user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A queryset of Wine objects.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>QuerySet</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vinventory.views.WineDeleteView.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vinventory/views.html#WineDeleteView.get_success_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vinventory.views.WineDeleteView.get_success_url" title="Link to this definition"></a></dt>
+<dd><p>Return the URL for redirection after successful deletion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The URL for the wine list view.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.views.WineDeleteView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#vinventory.views.WineDeleteView.model" title="Link to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#vinventory.models.Wine" title="vinventory.models.Wine"><code class="xref py py-class docutils literal notranslate"><span class="pre">Wine</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.views.WineDeleteView.success_url">
+<span class="sig-name descname"><span class="pre">success_url</span></span><a class="headerlink" href="#vinventory.views.WineDeleteView.success_url" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.views.WineDeleteView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'vinventory/wine_confirm_delete.html'</span></em><a class="headerlink" href="#vinventory.views.WineDeleteView.template_name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vinventory.views.WineListView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vinventory.views.</span></span><span class="sig-name descname"><span class="pre">WineListView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vinventory/views.html#WineListView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vinventory.views.WineListView" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">LoginRequiredMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ListView</span></code></p>
+<p>View to display a list of wines in the inventory.</p>
+<p>This view inherits from Django’s ListView and requires user authentication.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p>model: The model class representing Wine data.</p></li>
+<li><p>template_name: The name of the template for displaying the wine list.</p></li>
+<li><p>context_object_name: The name used to refer to the list of wines in the template.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Methods<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p>get_queryset(): Return a queryset of wines filtered by the logged-in user.</p></li>
+<li><p>get_success_url(): Return the URL to redirect to after successful operations.</p></li>
+<li><p>drink_wine(pk): Decrease the quantity of a wine and save the changes.</p></li>
+<li><p>post(request, <a href="#id1"><span class="problematic" id="id2">*</span></a>args, <a href="#id3"><span class="problematic" id="id4">**</span></a>kwargs): Handle POST requests, including the ‘drink’ action.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.views.WineListView.context_object_name">
+<span class="sig-name descname"><span class="pre">context_object_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'wines'</span></em><a class="headerlink" href="#vinventory.views.WineListView.context_object_name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vinventory.views.WineListView.drink_wine">
+<span class="sig-name descname"><span class="pre">drink_wine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pk</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vinventory/views.html#WineListView.drink_wine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vinventory.views.WineListView.drink_wine" title="Link to this definition"></a></dt>
+<dd><p>Decrease the quantity of a wine and save the changes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pk</strong> (<em>int</em>) – The primary key of the wine to be consumed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vinventory.views.WineListView.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vinventory/views.html#WineListView.get_queryset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vinventory.views.WineListView.get_queryset" title="Link to this definition"></a></dt>
+<dd><p>Return a queryset of wines filtered by the logged-in user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A queryset of Wine objects.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>QuerySet</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vinventory.views.WineListView.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vinventory/views.html#WineListView.get_success_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vinventory.views.WineListView.get_success_url" title="Link to this definition"></a></dt>
+<dd><p>Return the URL for redirection after successful operations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The URL for the wine list view.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.views.WineListView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#vinventory.views.WineListView.model" title="Link to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#vinventory.models.Wine" title="vinventory.models.Wine"><code class="xref py py-class docutils literal notranslate"><span class="pre">Wine</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vinventory.views.WineListView.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vinventory/views.html#WineListView.post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vinventory.views.WineListView.post" title="Link to this definition"></a></dt>
+<dd><p>Handle POST requests, including the ‘drink’ action.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.views.WineListView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'vinventory/wine_list.html'</span></em><a class="headerlink" href="#vinventory.views.WineListView.template_name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vinventory.views.WineUpdateView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vinventory.views.</span></span><span class="sig-name descname"><span class="pre">WineUpdateView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vinventory/views.html#WineUpdateView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vinventory.views.WineUpdateView" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">LoginRequiredMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">UpdateView</span></code></p>
+<p>Update an existing wine entry in the inventory.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.views.WineUpdateView.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['name',</span> <span class="pre">'variety',</span> <span class="pre">'region',</span> <span class="pre">'year',</span> <span class="pre">'quantity',</span> <span class="pre">'received_from',</span> <span class="pre">'date_received',</span> <span class="pre">'date_to_drink_start',</span> <span class="pre">'date_to_drink_end']</span></em><a class="headerlink" href="#vinventory.views.WineUpdateView.fields" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vinventory.views.WineUpdateView.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vinventory/views.html#WineUpdateView.get_queryset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vinventory.views.WineUpdateView.get_queryset" title="Link to this definition"></a></dt>
+<dd><p>Return the wines filtered by the logged-in user.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vinventory.views.WineUpdateView.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vinventory/views.html#WineUpdateView.get_success_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vinventory.views.WineUpdateView.get_success_url" title="Link to this definition"></a></dt>
+<dd><p>Return the URL to redirect to after successful update.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.views.WineUpdateView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#vinventory.views.WineUpdateView.model" title="Link to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#vinventory.models.Wine" title="vinventory.models.Wine"><code class="xref py py-class docutils literal notranslate"><span class="pre">Wine</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.views.WineUpdateView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'vinventory/wine_form.html'</span></em><a class="headerlink" href="#vinventory.views.WineUpdateView.template_name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-vinventory">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-vinventory" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="vinventory" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="vinventory.migrations.html" class="btn btn-neutral float-right" title="vinventory.migrations package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Naude Opperman.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
