@@ -7,7 +7,20 @@ from .models import Wine
 
 class WineListView(LoginRequiredMixin, ListView):
     """
-    Display a list of wines in the inventory.
+    View to display a list of wines in the inventory.
+
+    This view inherits from Django's ListView and requires user authentication.
+
+    :Attributes:
+        - model: The model class representing Wine data.
+        - template_name: The name of the template for displaying the wine list.
+        - context_object_name: The name used to refer to the list of wines in the template.
+
+    :Methods:
+        - get_queryset(): Return a queryset of wines filtered by the logged-in user.
+        - get_success_url(): Return the URL to redirect to after successful operations.
+        - drink_wine(pk): Decrease the quantity of a wine and save the changes.
+        - post(request, *args, **kwargs): Handle POST requests, including the 'drink' action.
     """
 
     model = Wine
@@ -16,19 +29,27 @@ class WineListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         """
-        Return the wines filtered by the logged-in user.
+        Return a queryset of wines filtered by the logged-in user.
+
+        :returns: A queryset of Wine objects.
+        :rtype: QuerySet
         """
         return Wine.objects.filter(user=self.request.user)
 
     def get_success_url(self):
         """
-        Return the URL to redirect to after successful operations.
+        Return the URL for redirection after successful operations.
+
+        :returns: The URL for the wine list view.
+        :rtype: str
         """
         return reverse_lazy("vinventory:wine_list")
 
     def drink_wine(self, pk):
         """
         Decrease the quantity of a wine and save the changes.
+
+        :param int pk: The primary key of the wine to be consumed.
         """
         wine = Wine.objects.get(pk=pk)
         if wine.quantity > 0:
