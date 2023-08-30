@@ -115,18 +115,18 @@ class WineUpdateView(LoginRequiredMixin, UpdateView):
 
 class WineDeleteView(LoginRequiredMixin, DeleteView):
     """
-    View for deleting a wine entry from the inventory.
+    View to delete a wine entry from the inventory.
 
-    Inherits from Django's DeleteView and requires user login.
+    This view inherits from Django's DeleteView and requires user authentication.
 
-    Attributes:
-        model (class): The model class representing the Wine data.
-        template_name (str): The name of the template used for the deletion confirmation page.
-        success_url (str): The URL to redirect to after successful deletion.
+    :Attributes:
+        - model: The model class representing Wine data.
+        - template_name: The name of the template for the deletion confirmation page.
+        - success_url: The URL to redirect to after successful deletion.
 
-    Methods:
-        get_queryset(): Return the wines filtered by the logged-in user.
-        get_success_url(): Return the URL to redirect to after successful deletion.
+    :Methods:
+        - get_queryset(): Return a queryset of wines filtered by the logged-in user.
+        - get_success_url(): Return the URL to redirect to after successful deletion.
     """
 
     model = Wine
@@ -135,18 +135,18 @@ class WineDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_queryset(self):
         """
-        Return the queryset of wines filtered by the logged-in user.
+        Return a queryset of wines filtered by the logged-in user.
 
-        Returns:
-            QuerySet: A QuerySet of Wine objects.
+        :returns: A queryset of Wine objects.
+        :rtype: QuerySet
         """
         return Wine.objects.filter(user=self.request.user)
 
     def get_success_url(self):
         """
-        Return the URL to redirect to after successful deletion.
+        Return the URL for redirection after successful deletion.
 
-        Returns:
-            str: The URL for the wine list view.
+        :returns: The URL for the wine list view.
+        :rtype: str
         """
         return reverse_lazy("vinventory:wine_list")
