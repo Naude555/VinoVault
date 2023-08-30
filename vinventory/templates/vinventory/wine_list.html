@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h1 class="mb-4">Wine Inventory</h1>
+
+    <ul class="list-group">
+      {% for wine in wines %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div>
+            <strong>{{ wine.name }}</strong> - Quantity: {{ wine.quantity }}
+            {% if wine.is_ready_to_drink %}
+            <span class="badge text-bg-success">Ready To Drink</span>
+            {% elif wine.is_getting_old %}
+            <span class="badge text-bg-warning">Wine Might be getting a bit old (Why not open a bottle, remember to update the end date if needed)</span>
+
+          {% endif %}
+          </div>
+          <div class="d-flex">
+            <form method="post" style="display: inline;">
+              {% csrf_token %}
+          <input type="hidden" name="wine_pk" value="{{ wine.pk }}">
+          <button type="submit" name="drink" class="btn btn-sm btn-outline-success">Drink</button>
+        </form>
+        <a href="{% url 'vinventory:wine_update' wine.pk %}" class="btn btn-sm btn-outline-primary ml-2">Edit</a>
+        <a href="{% url 'vinventory:wine_delete' wine.pk %}" class="btn btn-sm btn-outline-danger ml-2">Delete</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

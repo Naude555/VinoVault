@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container text-center my-5">
+  <h1>Welcome to VinoVault</h1>
+  <img src="{% static '/images/VinoVault.png' %}" alt="VinoVault Logo" class="img-fluid mt-4" style="max-height: 300px;">
+  <p class="mt-4">VinoVault is your digital wine inventory manager. Keep track of your wine collection, manage quantities, set drinking windows, and more.</p>
+  <p>Explore and manage your wines with ease.</p>
+  <a href="{% url 'vinventory:wine_list' %}" class="btn btn-primary btn-lg">Get Started</a>
+</div>
+{% endblock %}
