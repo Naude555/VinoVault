@@ -48,9 +48,20 @@ class WineListView(LoginRequiredMixin, ListView):
         return self.get(request, *args, **kwargs)
 
 
-class WineCreateView(LoginRequiredMixin, CreateView):
+class WineUpdateView(LoginRequiredMixin, UpdateView):
     """
-    Create a new wine entry in the inventory.
+    View to update an existing wine entry in the inventory.
+
+    This view inherits from Django's UpdateView and requires user authentication.
+
+    :Attributes:
+        - model: The model class representing Wine data.
+        - template_name: The name of the template for the wine update form.
+        - fields: The fields to be displayed in the update form.
+
+    :Methods:
+        - get_queryset(): Return a queryset of wines filtered by the logged-in user.
+        - get_success_url(): Return the URL to redirect to after successful update.
     """
 
     model = Wine
@@ -67,16 +78,21 @@ class WineCreateView(LoginRequiredMixin, CreateView):
         "date_to_drink_end",
     ]
 
-    def form_valid(self, form):
+    def get_queryset(self):
         """
-        Set the current user as the owner of the new wine entry.
+        Return a queryset of wines filtered by the logged-in user.
+
+        :returns: A queryset of Wine objects.
+        :rtype: QuerySet
         """
-        form.instance.user = self.request.user
-        return super().form_valid(form)
+        return Wine.objects.filter(user=self.request.user)
 
     def get_success_url(self):
         """
-        Return the URL to redirect to after successful creation.
+        Return the URL for redirection after successful update.
+
+        :returns: The URL for the wine list view.
+        :rtype: str
         """
         return reverse_lazy("vinventory:wine_list")
 
