@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>vinventory.views &mdash; VinoVault 00.00.01 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=d7bb8d4d"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            VinoVault
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">vinventory</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">VinoVault</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">vinventory.views</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for vinventory.views</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">django.contrib.auth.mixins</span> <span class="kn">import</span> <span class="n">LoginRequiredMixin</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">reverse_lazy</span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponseRedirect</span>
+<span class="kn">from</span> <span class="nn">django.views.generic</span> <span class="kn">import</span> <span class="n">ListView</span><span class="p">,</span> <span class="n">CreateView</span><span class="p">,</span> <span class="n">UpdateView</span><span class="p">,</span> <span class="n">DeleteView</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Wine</span>
+
+
+<div class="viewcode-block" id="WineListView">
+<a class="viewcode-back" href="../../vinventory.html#vinventory.views.WineListView">[docs]</a>
+<span class="k">class</span> <span class="nc">WineListView</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">ListView</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    View to display a list of wines in the inventory.</span>
+
+<span class="sd">    This view inherits from Django&#39;s ListView and requires user authentication.</span>
+
+<span class="sd">    :Attributes:</span>
+<span class="sd">        - model: The model class representing Wine data.</span>
+<span class="sd">        - template_name: The name of the template for displaying the wine list.</span>
+<span class="sd">        - context_object_name: The name used to refer to the list of wines in the template.</span>
+
+<span class="sd">    :Methods:</span>
+<span class="sd">        - get_queryset(): Return a queryset of wines filtered by the logged-in user.</span>
+<span class="sd">        - get_success_url(): Return the URL to redirect to after successful operations.</span>
+<span class="sd">        - drink_wine(pk): Decrease the quantity of a wine and save the changes.</span>
+<span class="sd">        - post(request, *args, **kwargs): Handle POST requests, including the &#39;drink&#39; action.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Wine</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s2">&quot;vinventory/wine_list.html&quot;</span>
+    <span class="n">context_object_name</span> <span class="o">=</span> <span class="s2">&quot;wines&quot;</span>
+
+<div class="viewcode-block" id="WineListView.get_queryset">
+<a class="viewcode-back" href="../../vinventory.html#vinventory.views.WineListView.get_queryset">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a queryset of wines filtered by the logged-in user.</span>
+
+<span class="sd">        :returns: A queryset of Wine objects.</span>
+<span class="sd">        :rtype: QuerySet</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Wine</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="WineListView.get_success_url">
+<a class="viewcode-back" href="../../vinventory.html#vinventory.views.WineListView.get_success_url">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the URL for redirection after successful operations.</span>
+
+<span class="sd">        :returns: The URL for the wine list view.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s2">&quot;vinventory:wine_list&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="WineListView.drink_wine">
+<a class="viewcode-back" href="../../vinventory.html#vinventory.views.WineListView.drink_wine">[docs]</a>
+    <span class="k">def</span> <span class="nf">drink_wine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pk</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Decrease the quantity of a wine and save the changes.</span>
+
+<span class="sd">        :param int pk: The primary key of the wine to be consumed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">wine</span> <span class="o">=</span> <span class="n">Wine</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">wine</span><span class="o">.</span><span class="n">quantity</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">wine</span><span class="o">.</span><span class="n">quantity</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">wine</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">META</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;HTTP_REFERER&quot;</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">)</span>
+        <span class="p">)</span>  <span class="c1"># Redirect back to the same page</span></div>
+
+
+<div class="viewcode-block" id="WineListView.post">
+<a class="viewcode-back" href="../../vinventory.html#vinventory.views.WineListView.post">[docs]</a>
+    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handle POST requests, including the &#39;drink&#39; action.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s2">&quot;drink&quot;</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">:</span>
+            <span class="n">wine_pk</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;wine_pk&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">drink_wine</span><span class="p">(</span><span class="n">wine_pk</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+</div>
+
+
+
+<span class="k">class</span> <span class="nc">WineUpdateView</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">UpdateView</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    View to update an existing wine entry in the inventory.</span>
+
+<span class="sd">    This view inherits from Django&#39;s UpdateView and requires user authentication.</span>
+
+<span class="sd">    :Attributes:</span>
+<span class="sd">        - model: The model class representing Wine data.</span>
+<span class="sd">        - template_name: The name of the template for the wine update form.</span>
+<span class="sd">        - fields: The fields to be displayed in the update form.</span>
+
+<span class="sd">    :Methods:</span>
+<span class="sd">        - get_queryset(): Return a queryset of wines filtered by the logged-in user.</span>
+<span class="sd">        - get_success_url(): Return the URL to redirect to after successful update.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Wine</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s2">&quot;vinventory/wine_form.html&quot;</span>
+    <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;variety&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;region&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;year&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;quantity&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;received_from&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;date_received&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;date_to_drink_start&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;date_to_drink_end&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a queryset of wines filtered by the logged-in user.</span>
+
+<span class="sd">        :returns: A queryset of Wine objects.</span>
+<span class="sd">        :rtype: QuerySet</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Wine</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the URL for redirection after successful update.</span>
+
+<span class="sd">        :returns: The URL for the wine list view.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s2">&quot;vinventory:wine_list&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="WineUpdateView">
+<a class="viewcode-back" href="../../vinventory.html#vinventory.views.WineUpdateView">[docs]</a>
+<span class="k">class</span> <span class="nc">WineUpdateView</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">UpdateView</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Update an existing wine entry in the inventory.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Wine</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s2">&quot;vinventory/wine_form.html&quot;</span>
+    <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;variety&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;region&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;year&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;quantity&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;received_from&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;date_received&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;date_to_drink_start&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;date_to_drink_end&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+
+<div class="viewcode-block" id="WineUpdateView.get_queryset">
+<a class="viewcode-back" href="../../vinventory.html#vinventory.views.WineUpdateView.get_queryset">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the wines filtered by the logged-in user.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Wine</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="WineUpdateView.get_success_url">
+<a class="viewcode-back" href="../../vinventory.html#vinventory.views.WineUpdateView.get_success_url">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the URL to redirect to after successful update.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s2">&quot;vinventory:wine_list&quot;</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="WineDeleteView">
+<a class="viewcode-back" href="../../vinventory.html#vinventory.views.WineDeleteView">[docs]</a>
+<span class="k">class</span> <span class="nc">WineDeleteView</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">DeleteView</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    View to delete a wine entry from the inventory.</span>
+
+<span class="sd">    This view inherits from Django&#39;s DeleteView and requires user authentication.</span>
+
+<span class="sd">    :Attributes:</span>
+<span class="sd">        - model: The model class representing Wine data.</span>
+<span class="sd">        - template_name: The name of the template for the deletion confirmation page.</span>
+<span class="sd">        - success_url: The URL to redirect to after successful deletion.</span>
+
+<span class="sd">    :Methods:</span>
+<span class="sd">        - get_queryset(): Return a queryset of wines filtered by the logged-in user.</span>
+<span class="sd">        - get_success_url(): Return the URL to redirect to after successful deletion.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Wine</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s2">&quot;vinventory/wine_confirm_delete.html&quot;</span>
+    <span class="n">success_url</span> <span class="o">=</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s2">&quot;vinventory:wine_list&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="WineDeleteView.get_queryset">
+<a class="viewcode-back" href="../../vinventory.html#vinventory.views.WineDeleteView.get_queryset">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a queryset of wines filtered by the logged-in user.</span>
+
+<span class="sd">        :returns: A queryset of Wine objects.</span>
+<span class="sd">        :rtype: QuerySet</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Wine</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="WineDeleteView.get_success_url">
+<a class="viewcode-back" href="../../vinventory.html#vinventory.views.WineDeleteView.get_success_url">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the URL for redirection after successful deletion.</span>
+
+<span class="sd">        :returns: The URL for the wine list view.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s2">&quot;vinventory:wine_list&quot;</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Naude Opperman.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
