@@ -155,20 +155,22 @@
 
 
 
-<span class="k">class</span> <span class="nc">WineUpdateView</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">UpdateView</span><span class="p">):</span>
+<div class="viewcode-block" id="WineCreateView">
+<a class="viewcode-back" href="../../vinventory.html#vinventory.views.WineCreateView">[docs]</a>
+<span class="k">class</span> <span class="nc">WineCreateView</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">CreateView</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    View to update an existing wine entry in the inventory.</span>
+<span class="sd">    View to create a new wine entry in the inventory.</span>
 
-<span class="sd">    This view inherits from Django&#39;s UpdateView and requires user authentication.</span>
+<span class="sd">    This view inherits from Django&#39;s CreateView and requires user authentication.</span>
 
 <span class="sd">    :Attributes:</span>
 <span class="sd">        - model: The model class representing Wine data.</span>
-<span class="sd">        - template_name: The name of the template for the wine update form.</span>
-<span class="sd">        - fields: The fields to be displayed in the update form.</span>
+<span class="sd">        - template_name: The name of the template for the wine creation form.</span>
+<span class="sd">        - fields: The fields to be displayed in the creation form.</span>
 
 <span class="sd">    :Methods:</span>
-<span class="sd">        - get_queryset(): Return a queryset of wines filtered by the logged-in user.</span>
-<span class="sd">        - get_success_url(): Return the URL to redirect to after successful update.</span>
+<span class="sd">        - form_valid(form): Set the current user as the owner of the new wine entry.</span>
+<span class="sd">        - get_success_url(): Return the URL to redirect to after successful creation.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">model</span> <span class="o">=</span> <span class="n">Wine</span>
@@ -185,23 +187,34 @@
         <span class="s2">&quot;date_to_drink_end&quot;</span><span class="p">,</span>
     <span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="WineCreateView.form_valid">
+<a class="viewcode-back" href="../../vinventory.html#vinventory.views.WineCreateView.form_valid">[docs]</a>
+    <span class="k">def</span> <span class="nf">form_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return a queryset of wines filtered by the logged-in user.</span>
+<span class="sd">        Set the current user as the owner of the new wine entry.</span>
 
-<span class="sd">        :returns: A queryset of Wine objects.</span>
-<span class="sd">        :rtype: QuerySet</span>
+<span class="sd">        :param form: The form containing the new wine entry data.</span>
+<span class="sd">        :type form: Form</span>
+
+<span class="sd">        :returns: The validated form.</span>
+<span class="sd">        :rtype: Form</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">Wine</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+        <span class="n">form</span><span class="o">.</span><span class="n">instance</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">form_valid</span><span class="p">(</span><span class="n">form</span><span class="p">)</span></div>
 
+
+<div class="viewcode-block" id="WineCreateView.get_success_url">
+<a class="viewcode-back" href="../../vinventory.html#vinventory.views.WineCreateView.get_success_url">[docs]</a>
     <span class="k">def</span> <span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return the URL for redirection after successful update.</span>
+<span class="sd">        Return the URL for redirection after successful creation.</span>
 
 <span class="sd">        :returns: The URL for the wine list view.</span>
 <span class="sd">        :rtype: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s2">&quot;vinventory:wine_list&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s2">&quot;vinventory:wine_list&quot;</span><span class="p">)</span></div>
+</div>
+
 
 
 <div class="viewcode-block" id="WineUpdateView">

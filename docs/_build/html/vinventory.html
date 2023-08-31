@@ -66,8 +66,9 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#module-vinventory.tests">vinventory.tests module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#vinventory-urls-module">vinventory.urls module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-vinventory.urls">vinventory.urls module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-vinventory.views">vinventory.views module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#vinventory.views.WineCreateView"><code class="docutils literal notranslate"><span class="pre">WineCreateView</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#vinventory.views.WineDeleteView"><code class="docutils literal notranslate"><span class="pre">WineDeleteView</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#vinventory.views.WineListView"><code class="docutils literal notranslate"><span class="pre">WineListView</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#vinventory.views.WineUpdateView"><code class="docutils literal notranslate"><span class="pre">WineUpdateView</span></code></a></li>
@@ -442,11 +443,81 @@ object the first time, the query is executed.</p>
 <section id="module-vinventory.tests">
 <span id="vinventory-tests-module"></span><h2>vinventory.tests module<a class="headerlink" href="#module-vinventory.tests" title="Link to this heading"></a></h2>
 </section>
-<section id="vinventory-urls-module">
-<h2>vinventory.urls module<a class="headerlink" href="#vinventory-urls-module" title="Link to this heading"></a></h2>
+<section id="module-vinventory.urls">
+<span id="vinventory-urls-module"></span><h2>vinventory.urls module<a class="headerlink" href="#module-vinventory.urls" title="Link to this heading"></a></h2>
 </section>
 <section id="module-vinventory.views">
 <span id="vinventory-views-module"></span><h2>vinventory.views module<a class="headerlink" href="#module-vinventory.views" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="vinventory.views.WineCreateView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vinventory.views.</span></span><span class="sig-name descname"><span class="pre">WineCreateView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vinventory/views.html#WineCreateView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vinventory.views.WineCreateView" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">LoginRequiredMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">CreateView</span></code></p>
+<p>View to create a new wine entry in the inventory.</p>
+<p>This view inherits from Django’s CreateView and requires user authentication.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p>model: The model class representing Wine data.</p></li>
+<li><p>template_name: The name of the template for the wine creation form.</p></li>
+<li><p>fields: The fields to be displayed in the creation form.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Methods<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p>form_valid(form): Set the current user as the owner of the new wine entry.</p></li>
+<li><p>get_success_url(): Return the URL to redirect to after successful creation.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.views.WineCreateView.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['name',</span> <span class="pre">'variety',</span> <span class="pre">'region',</span> <span class="pre">'year',</span> <span class="pre">'quantity',</span> <span class="pre">'received_from',</span> <span class="pre">'date_received',</span> <span class="pre">'date_to_drink_start',</span> <span class="pre">'date_to_drink_end']</span></em><a class="headerlink" href="#vinventory.views.WineCreateView.fields" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vinventory.views.WineCreateView.form_valid">
+<span class="sig-name descname"><span class="pre">form_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vinventory/views.html#WineCreateView.form_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vinventory.views.WineCreateView.form_valid" title="Link to this definition"></a></dt>
+<dd><p>Set the current user as the owner of the new wine entry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>form</strong> (<em>Form</em>) – The form containing the new wine entry data.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The validated form.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Form</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vinventory.views.WineCreateView.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vinventory/views.html#WineCreateView.get_success_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vinventory.views.WineCreateView.get_success_url" title="Link to this definition"></a></dt>
+<dd><p>Return the URL for redirection after successful creation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The URL for the wine list view.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.views.WineCreateView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#vinventory.views.WineCreateView.model" title="Link to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#vinventory.models.Wine" title="vinventory.models.Wine"><code class="xref py py-class docutils literal notranslate"><span class="pre">Wine</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vinventory.views.WineCreateView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'vinventory/wine_form.html'</span></em><a class="headerlink" href="#vinventory.views.WineCreateView.template_name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="vinventory.views.WineDeleteView">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vinventory.views.</span></span><span class="sig-name descname"><span class="pre">WineDeleteView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vinventory/views.html#WineDeleteView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vinventory.views.WineDeleteView" title="Link to this definition"></a></dt>
@@ -504,7 +575,7 @@ object the first time, the query is executed.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="vinventory.views.WineDeleteView.success_url">
-<span class="sig-name descname"><span class="pre">success_url</span></span><a class="headerlink" href="#vinventory.views.WineDeleteView.success_url" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">success_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/vinventory/wine_list/'</span></em><a class="headerlink" href="#vinventory.views.WineDeleteView.success_url" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
