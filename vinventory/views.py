@@ -69,20 +69,20 @@ class WineListView(LoginRequiredMixin, ListView):
         return self.get(request, *args, **kwargs)
 
 
-class WineUpdateView(LoginRequiredMixin, UpdateView):
+class WineCreateView(LoginRequiredMixin, CreateView):
     """
-    View to update an existing wine entry in the inventory.
+    View to create a new wine entry in the inventory.
 
-    This view inherits from Django's UpdateView and requires user authentication.
+    This view inherits from Django's CreateView and requires user authentication.
 
     :Attributes:
         - model: The model class representing Wine data.
-        - template_name: The name of the template for the wine update form.
-        - fields: The fields to be displayed in the update form.
+        - template_name: The name of the template for the wine creation form.
+        - fields: The fields to be displayed in the creation form.
 
     :Methods:
-        - get_queryset(): Return a queryset of wines filtered by the logged-in user.
-        - get_success_url(): Return the URL to redirect to after successful update.
+        - form_valid(form): Set the current user as the owner of the new wine entry.
+        - get_success_url(): Return the URL to redirect to after successful creation.
     """
 
     model = Wine
@@ -99,18 +99,22 @@ class WineUpdateView(LoginRequiredMixin, UpdateView):
         "date_to_drink_end",
     ]
 
-    def get_queryset(self):
+    def form_valid(self, form):
         """
-        Return a queryset of wines filtered by the logged-in user.
+        Set the current user as the owner of the new wine entry.
 
-        :returns: A queryset of Wine objects.
-        :rtype: QuerySet
+        :param form: The form containing the new wine entry data.
+        :type form: Form
+
+        :returns: The validated form.
+        :rtype: Form
         """
-        return Wine.objects.filter(user=self.request.user)
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
     def get_success_url(self):
         """
-        Return the URL for redirection after successful update.
+        Return the URL for redirection after successful creation.
 
         :returns: The URL for the wine list view.
         :rtype: str
